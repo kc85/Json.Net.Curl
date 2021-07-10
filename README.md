@@ -64,9 +64,8 @@ Json.Net.Curl.Save(@"http://myserver.com/add", new JObject() {
 
 
 ## NuGet
+https://www.nuget.org/packages/Json.Net.Curl
 ```sh
 Install-Package Json.Net.Curl 
-
-https://www.nuget.org/packages/Json.Net.Curl
 ```
 
