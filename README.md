@@ -14,3 +14,50 @@
 - Get Save JSON on  local file system
 - Get Save JSON on  remote location   
 - Async method support 
+
+## Get Examples
+```sh
+// get JObject from local file system 
+var json = Json.Net.Curl.Get(@"data\JObjectUnitTest1.json");
+var json = await Json.Net.Curl.GetAsync(@"data\JObjectUnitTest1.json")
+
+// get JObject from Server  
+var json = await Json.Net.Curl.GetAsync("http://myserver.com/data.json");
+
+// get JArray  from local file system 
+var jsonArr = Json.Net.Curl.GetJArray(@"data\JArrUnitTest1.json");
+var jsonArr = await Json.Net.Curl.GetJArrayAsync(@"data\JArrUnitTest1.json")
+
+// get JArray from Server  
+var jsonArr = await Json.Net.Curl.GetJArrayAsync("http://myserver.com/data_arr.json");
+
+```
+
+## Save Examples
+```sh
+// Save to local file system
+Json.Net.Curl.Save(@"data\JObjectSave1.json", new JObject() { 
+["id"] = "1",
+["user"] = "user1",
+["pass"] = "AAA@@@!!!!"
+});
+   
+   
+ // Save/send to rest endpoint
+Json.Net.Curl.Save(@"http://myserver.com/add", new JObject() { 
+["id"] = "1",
+["user"] = "user1",
+["pass"] = "AAA@@@!!!!"
+});
+
+// Save Json Array 
+
+ await Json.Net.Curl.SaveJArrayAsync(@"data\JObjectSaveJArrayAsync1.json", new JArray(){ new JObject()
+    {
+    ["id"] = "1",
+    ["user"] = "User1",
+    ["pass"] = "AAA@@@!!!!"
+    } 
+ });
+            
+```
