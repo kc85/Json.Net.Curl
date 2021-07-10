@@ -61,3 +61,12 @@ Json.Net.Curl.Save(@"http://myserver.com/add", new JObject() {
  });
             
 ```
+
+
+## NuGet
+```sh
+Install-Package Json.Net.Curl 
+
+https://www.nuget.org/packages/Json.Net.Curl
+```
+
