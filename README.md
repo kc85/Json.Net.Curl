@@ -51,7 +51,7 @@ var jsonArr = await Json.Net.Curl.GetJArrayAsync("http://myserver.com/data_arr.j
 
 ```
 
-## Save Examples
+## Save/Post/Put Examples
 ```sh
 // Save to local file system
 Json.Net.Curl.Save(@"data\JObjectSave1.json", new JObject() { 
