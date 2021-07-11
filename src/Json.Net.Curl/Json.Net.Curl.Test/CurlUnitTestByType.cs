@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Json.Net.CurlTest
@@ -22,9 +23,10 @@ namespace Json.Net.CurlTest
         }
 
 
-        public async Task GetJson()
+        public async Task GetJsonUsingAuth()
         {
-            var json = await Json.Net.Curl.GetAsync<Apple>(@"data\JObjectUnitTest1.json");
+            //Get Json from Web using authorization
+            var json = await Json.Net.Curl.GetAsync<Apple>(@"http://myserver.com/data.json", new Dictionary<string, string>() {["Authorization"] = "Basic dXNlcjpic2Ux" });
             Assert.IsNotNull(json);
         }
 

@@ -14,10 +14,25 @@ namespace Json.Net
     public static class Curl
     {
         private const long TIMEOUT_MS = (1000 * 60) * 3;
+        /// <summary>
+        /// Get JSON from local or Web Location.
+        /// </summary>
+        /// <param name="location">Local file path or Web Url e.g : C:\data\my.json , https://myserver.com/data.json </param>
+        /// <param name="metadata">Http Headers</param>
+        /// <param name="timeoutMS">Http Timeout in millisecond </param>
+        /// <returns></returns>
         public static JObject Get(string location, Dictionary<string, string> metadata = null, long timeoutMS = TIMEOUT_MS)
         {
             return GetAsync(location, metadata, timeoutMS).GetAwaiter().GetResult();
         }
+
+        /// <summary>
+        /// Get Data from local or Web Location.
+        /// </summary>
+        /// <param name="location">Local file path or Web Url e.g : C:\data\my.json , https://myserver.com/data.json </param>
+        /// <param name="metadata">Http Headers</param>
+        /// <param name="timeoutMS">Http Timeout in millisecond </param>
+        /// <returns></returns>
         public static async Task<T> GetAsync<T>(string location, Dictionary<string, string> metadata = null, long timeoutMS = TIMEOUT_MS)
         {
             if (IsLocalFile(location))
@@ -168,7 +183,50 @@ namespace Json.Net
                 }
             }
         }
-        private static  MediaTypeHeaderValue GetContentType(Dictionary<string, string> headers)
+
+
+        public static List<FileListModel> List(string location)
+        {
+            if (IsLocalFile(location))
+            {
+                if (Directory.Exists(location))
+                {
+                    var list = Directory.GetFiles(location).Select(f =>
+                    {
+
+                        var fi = new FileInfo(Path.Combine(f));
+
+                        return new FileListModel()
+                        {
+                            FullName = fi.FullName,
+                            Name = fi.Name
+                        };
+                    }).ToList();
+
+                    list.AddRange(Directory.GetDirectories(location).Select(f =>
+                   {
+                       var di = new DirectoryInfo(Path.Combine(f));
+                       return new FileListModel()
+                       {
+                           IsDirectory = true,
+                           FullName = di.FullName,
+                           Name = di.Name
+                       };
+                   }).ToList());
+                    return list;
+                }
+                else
+                {
+                    throw new DirectoryNotFoundException($"Path: {location}");
+                }
+            }
+            else
+            {
+                throw new NotSupportedException("List only applicable for local file system");
+            }
+        }
+
+            private static  MediaTypeHeaderValue GetContentType(Dictionary<string, string> headers)
         {
             var contetType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
             if (headers != null)

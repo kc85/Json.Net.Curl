@@ -43,7 +43,12 @@ var jsonArr = await Json.Net.Curl.GetJArrayAsync("http://myserver.com/data_arr.j
 
  //Get Json from Web using authorization
  var json = await Json.Net.Curl.GetAsync<Apple>(@"http://myserver.com/data.json", new Dictionary<string, string>() {["Authorization"] = "Basic dXNlcjpic2Ux" });
-            
+  
+ 
+// Get File List 
+ var list = Json.Net.Curl.List(@"directory_path");
+
+
 ```
 
 ## Save Examples

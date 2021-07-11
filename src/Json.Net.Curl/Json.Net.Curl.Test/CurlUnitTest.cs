@@ -115,5 +115,15 @@ namespace Json.Net.CurlTest
             Assert.Pass();
         }
         #endregion
+
+        #region  List
+        [Test]
+        public void ListFiles()
+        {
+            var list = Json.Net.Curl.List(@"data");
+            Assert.Pass();
+        }
+
+        #endregion
     }
 }
