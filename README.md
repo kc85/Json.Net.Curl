@@ -1,5 +1,5 @@
 # Json.Net.Curl
-## .Net implement JSON CURD operations   
+## Simple .Net lib for file and http operations. You can store/retrive JSON files from local and remote location   
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
